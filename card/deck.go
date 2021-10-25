@@ -3,6 +3,7 @@ package card
 import (
 	"fmt"
 	"math/rand"
+	"time"
 )
 
 type Deck []*Card
@@ -18,10 +19,13 @@ func NewDeck() Deck {
 	return d
 }
 
-func (d Deck) Shuffle() {
-	for i := range d {
+func (d *Deck) Shuffle() {
+	rand.Seed(time.Now().UnixNano())
+
+	for i := range *d {
 		n := rand.Intn(52)
-		d[i], d[n] = d[n], d[i]
+		fmt.Println(n)
+		(*d)[i], (*d)[n] = (*d)[n], (*d)[i]
 	}
 }
 
@@ -30,4 +34,10 @@ func (d Deck) Print() {
 		fmt.Printf("%v\n", c)
 	}
 
+}
+
+func (d *Deck) TakeCard() *Card {
+	c := (*d)[0]
+	*d = append((*d)[:0], (*d)[1:]...)
+	return c
 }
