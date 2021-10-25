@@ -10,5 +10,7 @@ func main() {
 	g.Deal()
 	g.PrintHands()
 	g.Play()
+	g.PrintHands()
+	g.CheckBust()
 
 }

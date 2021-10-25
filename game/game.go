@@ -44,17 +44,17 @@ func (g *Game) PrintHands() {
 	if g.step != 1 {
 		dc := []string{}
 		for _, c := range g.Dealer.Hand {
-			dc = append(dc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+			dc = append(dc, fmt.Sprintf("%s of %s", c.Rank, c.Suit))
 		}
 		ds += strings.Join(dc, ", ")
 	} else {
-		ds += fmt.Sprintf("%s of %s, ***HIDDEN CARD***", g.Dealer.Hand[0].Value, g.Dealer.Hand[0].Suit)
+		ds += fmt.Sprintf("%s of %s, ***HIDDEN CARD***", g.Dealer.Hand[0].Rank, g.Dealer.Hand[0].Suit)
 	}
 
 	ps := "Player has: "
 	pc := []string{}
 	for _, c := range g.Player.Hand {
-		pc = append(pc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+		pc = append(pc, fmt.Sprintf("%s of %s", c.Rank, c.Suit))
 	}
 	ps += strings.Join(pc, ", ")
 
@@ -77,4 +77,28 @@ func (g *Game) Play() {
 		fmt.Println("STAND")
 
 	}
+}
+
+func (g *Game) CheckBust() bool {
+	// need to check if player card sum
+	// is over 21 and if any of cards is an ace
+	aceCount := 0
+	sum := 0
+	for _, c := range g.Player.Hand {
+		if c.Value == 1 {
+			aceCount++
+		}
+		sum += c.Value
+	}
+
+	if sum > 21 {
+		fmt.Println("Over 21", sum)
+		return true
+	} else if sum < 21 {
+		fmt.Println("Less than 21", sum)
+	} else {
+		fmt.Println("21", sum)
+	}
+
+	return false
 }

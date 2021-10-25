@@ -1,9 +1,10 @@
 package card
 
 type Card struct {
-	Value string
+	Rank  string
 	Suit  string
+	Value int
 }
 
-var values = []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"}
+var ranks = []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"}
 var suits = []string{"Spades", "Hearts", "Diamonds", "Clubs"}

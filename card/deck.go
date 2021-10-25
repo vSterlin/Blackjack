@@ -10,9 +10,13 @@ type Deck []*Card
 
 func NewDeck() Deck {
 	d := Deck{}
-	for _, value := range values {
+	for v, rank := range ranks {
 		for _, suit := range suits {
-			d = append(d, &Card{value, suit})
+			// j, q, k need value 10
+			if v > 9 {
+				v = 9
+			}
+			d = append(d, &Card{rank, suit, v + 1})
 		}
 	}
 
