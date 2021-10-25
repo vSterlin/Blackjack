@@ -8,15 +8,21 @@ import (
 	"github.com/vSterlin/bj/player"
 )
 
+const (
+	STAND = "STAND"
+	HIT   = "HIT"
+)
+
 type Game struct {
 	Player *player.Player
 	Dealer *player.Player
 	Deck   *card.Deck
+	step   uint
 }
 
 func NewGame() *Game {
 	d := card.NewDeck()
-	g := &Game{&player.Player{}, &player.Player{}, &d}
+	g := &Game{&player.Player{}, &player.Player{}, &d, 0}
 
 	return g
 }
@@ -30,15 +36,20 @@ func (g *Game) Deal() {
 		c = g.Deck.TakeCard()
 		g.Dealer.Hand = append(g.Dealer.Hand, c)
 	}
+	g.step++
 }
 
 func (g *Game) PrintHands() {
 	ds := "Dealer has: "
-	dc := []string{}
-	for _, c := range g.Dealer.Hand {
-		dc = append(dc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+	if g.step != 1 {
+		dc := []string{}
+		for _, c := range g.Dealer.Hand {
+			dc = append(dc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+		}
+		ds += strings.Join(dc, ", ")
+	} else {
+		ds += fmt.Sprintf("%s of %s, ***HIDDEN CARD***", g.Dealer.Hand[0].Value, g.Dealer.Hand[0].Suit)
 	}
-	ds += strings.Join(dc, ", ")
 
 	ps := "Player has: "
 	pc := []string{}
@@ -49,4 +60,8 @@ func (g *Game) PrintHands() {
 
 	fmt.Println(ds)
 	fmt.Println(ps)
+}
+
+func (g *Game) Play() {
+	// check user input for option hit or stand
 }
