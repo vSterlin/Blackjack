@@ -64,4 +64,10 @@ func (g *Game) PrintHands() {
 
 func (g *Game) Play() {
 	// check user input for option hit or stand
+	i := HIT
+	if i == HIT {
+		g.Player.Hand = append(g.Player.Hand, g.Deck.TakeCard())
+	} else if i == STAND {
+		// do stuff
+	}
 }
