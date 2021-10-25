@@ -46,6 +46,7 @@ func (g *Game) Deal() {
 }
 
 func (g *Game) PrintHands() {
+	fmt.Println()
 	ds := "Dealer has: "
 	if g.step != 1 {
 		dc := []string{}
@@ -77,11 +78,9 @@ func (g *Game) Play() int {
 	fmt.Scanf("%d", &choice)
 
 	if choice == HIT {
-		fmt.Println("HIT")
 		g.Player.Hand = append(g.Player.Hand, g.Deck.TakeCard())
 		pt := g.GetTotal(PLAYER)
 		if pt > 21 {
-			fmt.Println("LOST")
 			return LOST
 		}
 
@@ -141,15 +140,16 @@ func (g *Game) GetTotal(c int) int {
 func (g *Game) DetermineWinner() string {
 	pt := g.GetTotal(PLAYER)
 	dt := g.GetTotal(DEALER)
-
+	res := ""
 	if pt > dt {
-		res := "YOU HAVE WON!!!"
+		res = "\033[32m" + "YOU HAVE WON!!!"
 		if pt == 21 {
 			res += " BLACKJACK!!!"
 		}
-		return res
+	} else {
+		res = "\033[31m" + "YOU HAVE LOST!!!"
 	}
-	return "YOU HAVE LOST!!!"
+	return res + "\033[0m"
 }
 
 func (g *Game) Cleanup() {
@@ -159,17 +159,18 @@ func (g *Game) Cleanup() {
 
 func (g *Game) Loop() {
 
-	g.Deal()
 	for {
+		g.Deal()
 		g.PrintHands()
 		res := g.Play()
 		if res == LOST {
+			g.PrintHands()
 			g.Cleanup()
-			fmt.Println("YOU HAVE LOST!!!")
+			fmt.Println("\033[31m", "YOU HAVE LOST!!!", "\033[0m")
 			break
 		}
-		g.PrintHands()
 		g.DealerPlay()
+		g.PrintHands()
 		s := g.DetermineWinner()
 		g.Cleanup()
 		fmt.Println(s)
