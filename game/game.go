@@ -79,7 +79,7 @@ func (g *Game) Play() {
 	}
 }
 
-func (g *Game) CheckBust() bool {
+func (g *Game) GetPlayerHandSum() int {
 	// need to check if player card sum
 	// is over 21 and if any of cards is an ace
 	aceCount := 0
@@ -91,14 +91,14 @@ func (g *Game) CheckBust() bool {
 		sum += c.Value
 	}
 
-	if sum > 21 {
-		fmt.Println("Over 21", sum)
-		return true
-	} else if sum < 21 {
-		fmt.Println("Less than 21", sum)
-	} else {
-		fmt.Println("21", sum)
+	// for length of aceCount add 10
+	// until reached over 21
+	for i := 0; i < aceCount; i++ {
+		if sum+10 <= 21 {
+			sum += 10
+		}
 	}
 
-	return false
+	fmt.Println(sum)
+	return sum
 }

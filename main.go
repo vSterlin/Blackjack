@@ -11,6 +11,6 @@ func main() {
 	g.PrintHands()
 	g.Play()
 	g.PrintHands()
-	g.CheckBust()
+	g.GetPlayerHandSum()
 
 }
