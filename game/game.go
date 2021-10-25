@@ -155,6 +155,7 @@ func (g *Game) DetermineWinner() string {
 func (g *Game) Cleanup() {
 	g.Player.Hand = g.Player.Hand[:0]
 	g.Dealer.Hand = g.Dealer.Hand[:0]
+	g.step = 0
 }
 
 func (g *Game) Loop() {
