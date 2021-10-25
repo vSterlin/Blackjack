@@ -24,7 +24,6 @@ func (d *Deck) Shuffle() {
 
 	for i := range *d {
 		n := rand.Intn(52)
-		fmt.Println(n)
 		(*d)[i], (*d)[n] = (*d)[n], (*d)[i]
 	}
 }

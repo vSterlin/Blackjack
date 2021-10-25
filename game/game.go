@@ -1,6 +1,9 @@
 package game
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/vSterlin/bj/card"
 	"github.com/vSterlin/bj/player"
 )
@@ -27,4 +30,23 @@ func (g *Game) Deal() {
 		c = g.Deck.TakeCard()
 		g.Dealer.Hand = append(g.Dealer.Hand, c)
 	}
+}
+
+func (g *Game) PrintHands() {
+	ds := "Dealer has: "
+	dc := []string{}
+	for _, c := range g.Dealer.Hand {
+		dc = append(dc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+	}
+	ds += strings.Join(dc, ", ")
+
+	ps := "Player has: "
+	pc := []string{}
+	for _, c := range g.Player.Hand {
+		pc = append(pc, fmt.Sprintf("%s of %s", c.Value, c.Suit))
+	}
+	ps += strings.Join(pc, ", ")
+
+	fmt.Println(ds)
+	fmt.Println(ps)
 }

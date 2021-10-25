@@ -8,5 +8,6 @@ func main() {
 
 	g := game.NewGame()
 	g.Deal()
-	g.Deck.Print()
+	g.PrintHands()
+
 }
