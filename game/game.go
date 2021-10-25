@@ -63,6 +63,7 @@ func (g *Game) PrintHands() {
 }
 
 func (g *Game) Play() {
+	g.step++
 
 	fmt.Println("Please choose: 1) HIT or 2) STAND")
 
