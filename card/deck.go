@@ -25,9 +25,9 @@ func NewDeck() Deck {
 
 func (d *Deck) Shuffle() {
 	rand.Seed(time.Now().UnixNano())
-
+	maxN := len(*d)
 	for i := range *d {
-		n := rand.Intn(52)
+		n := rand.Intn(maxN)
 		(*d)[i], (*d)[n] = (*d)[n], (*d)[i]
 	}
 }
