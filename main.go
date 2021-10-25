@@ -9,5 +9,6 @@ func main() {
 	g := game.NewGame()
 	g.Deal()
 	g.PrintHands()
+	g.Play()
 
 }

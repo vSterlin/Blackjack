@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	STAND = "STAND"
-	HIT   = "HIT"
+	HIT = iota + 1
+	STAND
 )
 
 type Game struct {
@@ -63,11 +63,18 @@ func (g *Game) PrintHands() {
 }
 
 func (g *Game) Play() {
-	// check user input for option hit or stand
-	i := HIT
-	if i == HIT {
+
+	fmt.Println("Please choose: 1) HIT or 2) STAND")
+
+	var choice int
+	fmt.Scanf("%d", &choice)
+
+	if choice == HIT {
+		fmt.Println("HIT")
 		g.Player.Hand = append(g.Player.Hand, g.Deck.TakeCard())
-	} else if i == STAND {
+	} else if choice == STAND {
 		// do stuff
+		fmt.Println("STAND")
+
 	}
 }
