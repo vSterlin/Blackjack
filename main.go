@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/vSterlin/bj/card"
+	"github.com/vSterlin/bj/game"
 )
 
 func main() {
 
-	d := card.NewDeck()
-	d.Shuffle()
-	d.Print()
+	g := game.NewGame()
+	g.Deck.Print()
+
 }

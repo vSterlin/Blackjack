@@ -1,6 +1,6 @@
 package card
 
-type card struct {
+type Card struct {
 	Value string
 	Suit  string
 }
